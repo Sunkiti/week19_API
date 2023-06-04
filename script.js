@@ -1,18 +1,21 @@
 const posts = document.querySelector('posts');
-posts.forEach (elem => {
-    console.log(elem)
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
+fetch('https://jsonplaceholder.typicode.com/todos/1')
     .then(response => response.json())
-    .then(json => console.log(json))
-    const div = document.createElement('div');
-    div.className = "post__title";
-    div.innerHTML = 
-    posts.append (div);
-})
+    .then((json) => {
+        json.forEach ((elem) =>{
+            console.log (`${elem.title}`);
+            console.log (`${elem.body}`);
+            const div = document.createElement('div');
+            div.className.add('post__title');
+            div.innerHTML = 
+                `<p>${elem.title}</p>`;
+            const div2 = document.createElement('div');
+            div2.className.add('post__body');
+            div2.innerHTML = 
+                `<p>${elem.body}</p>`;
+            posts.append (div, div2);
+        })
+    }) 
     .catch((err) => {
-        console.log(`Ошибка. Запрос не выполнен` + err);
-});
-
-btn.addEventListener ('click', function (){
-
-})
+        posts.innerHTML = `Ошибка. Запрос не выполнен`;
+    });
