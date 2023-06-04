@@ -1,4 +1,5 @@
 const posts = document.querySelector('posts');
+const btn = document.querySelector('btn');
 fetch('https://jsonplaceholder.typicode.com/todos/1')
     .then(response => response.json())
     .then((json) => {
@@ -8,14 +9,12 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
             const div = document.createElement('div');
             div.className.add('post__title');
             div.innerHTML = 
-                `<p>${elem.title}</p>`;
-            const div2 = document.createElement('div');
-            div2.className.add('post__body');
-            div2.innerHTML = 
-                `<p>${elem.body}</p>`;
-            posts.append (div, div2);
+                `<p>${elem.title}</p>
+                <p>${elem.body}</p>
+                `;
+                posts.appendChild(div); 
         })
     }) 
     .catch((err) => {
-        posts.innerHTML = `Ошибка. Запрос не выполнен`;
-    });
+        console.log('Ошибка. Запрос не выполнен');
+    });     
